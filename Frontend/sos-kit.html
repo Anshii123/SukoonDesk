@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SukoonDesk - Quick SOS Offline Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap & Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            min-height: 100vh;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 8px 32px 0 rgba(155, 81, 224, 0.12);
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem;
+        }
+        .sos-icon {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1);}
+            50% { transform: scale(1.08);}
+            100% { transform: scale(1);}
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1.5s;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        .exercise-title {
+            cursor: pointer;
+            user-select: none;
+        }
+        .chevron {
+            transition: transform 0.3s;
+        }
+        .chevron.rotate {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center">
+    <div class="container py-5">
+        <div class="glass mx-auto max-w-2xl p-6">
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <div class="flex justify-center mb-2">
+                    <span class="sos-icon text-5xl text-purple-500">🆘</span>
+                </div>
+                <h2 class="text-3xl font-bold text-purple-700 mb-2">Quick SOS Offline Kit</h2>
+                <p class="text-purple-400">Feeling anxious? Try these exercises or listen to calming sounds. No internet needed.</p>
+            </div>
+            <!-- Exercises Section -->
+            <div class="mb-6">
+                <h4 class="text-purple-700 font-semibold mb-3">Quick Calming Exercises</h4>
+                <div class="row g-3" id="exercise-list">
+                    <!-- Exercise 1 -->
+                    <div class="col-md-6">
+                        <div class="bg-purple-50 p-3 rounded-lg shadow-sm h-100">
+                            <div class="flex items-center justify-between exercise-title" data-id="1">
+                                <h5 class="font-bold text-purple-600 mb-0">1. 4-7-8 Breathing</h5>
+                                <span class="chevron">&#9654;</span>
+                            </div>
+                            <ul class="text-purple-700 text-sm ps-3 mt-2 exercise-details" style="display:none;">
+                                <li>Inhale through your nose for 4 seconds</li>
+                                <li>Hold your breath for 7 seconds</li>
+                                <li>Exhale slowly through your mouth for 8 seconds</li>
+                                <li>Repeat 4 times</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Exercise 2 -->
+                    <div class="col-md-6">
+                        <div class="bg-purple-50 p-3 rounded-lg shadow-sm h-100">
+                            <div class="flex items-center justify-between exercise-title" data-id="2">
+                                <h5 class="font-bold text-purple-600 mb-0">2. Grounding 5-4-3-2-1</h5>
+                                <span class="chevron">&#9654;</span>
+                            </div>
+                            <ul class="text-purple-700 text-sm ps-3 mt-2 exercise-details" style="display:none;">
+                                <li>5 things you can see</li>
+                                <li>4 things you can touch</li>
+                                <li>3 things you can hear</li>
+                                <li>2 things you can smell</li>
+                                <li>1 thing you can taste</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Exercise 3 -->
+                    <div class="col-md-6">
+                        <div class="bg-purple-50 p-3 rounded-lg shadow-sm h-100">
+                            <div class="flex items-center justify-between exercise-title" data-id="3">
+                                <h5 class="font-bold text-purple-600 mb-0">3. Butterfly Hug</h5>
+                                <span class="chevron">&#9654;</span>
+                            </div>
+                            <ul class="text-purple-700 text-sm ps-3 mt-2 exercise-details" style="display:none;">
+                                <li>Cross your arms over your chest</li>
+                                <li>Tap your shoulders alternately</li>
+                                <li>Breathe deeply as you do this</li>
+                                <li>Continue for 1-2 minutes</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Exercise 4 -->
+                    <div class="col-md-6">
+                        <div class="bg-purple-50 p-3 rounded-lg shadow-sm h-100">
+                            <div class="flex items-center justify-between exercise-title" data-id="4">
+                                <h5 class="font-bold text-purple-600 mb-0">4. Affirmation Pause</h5>
+                                <span class="chevron">&#9654;</span>
+                            </div>
+                            <ul class="text-purple-700 text-sm ps-3 mt-2 exercise-details" style="display:none;">
+                                <li>Close your eyes</li>
+                                <li>Repeat: "I am safe. This feeling will pass."</li>
+                                <li>Breathe slowly and deeply</li>
+                                <li>Repeat as needed</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Relaxing Audios Section -->
+            <div>
+                <h4 class="text-purple-700 font-semibold mb-3">Relaxing Audios</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="audio-list">
+                    <div class="bg-purple-100 rounded-lg p-3 flex items-center space-x-3 shadow-sm">
+                        <span class="text-2xl">🌧️</span>
+                        <div class="flex-1">
+                            <div class="font-semibold text-purple-700">Gentle Rain</div>
+                            <audio controls preload="auto" class="w-full mt-1 audio-control">
+                                <source src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfa8c8f.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    </div>
+                    <div class="bg-purple-100 rounded-lg p-3 flex items-center space-x-3 shadow-sm">
+                        <span class="text-2xl">🌊</span>
+                        <div class="flex-1">
+                            <div class="font-semibold text-purple-700">Ocean Waves</div>
+                            <audio controls preload="auto" class="w-full mt-1 audio-control">
+                                <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b6e3b4e.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    </div>
+                    <div class="bg-purple-100 rounded-lg p-3 flex items-center space-x-3 shadow-sm">
+                        <span class="text-2xl">🎵</span>
+                        <div class="flex-1">
+                            <div class="font-semibold text-purple-700">Soft Piano</div>
+                            <audio controls preload="auto" class="w-full mt-1 audio-control">
+                                <source src="https://cdn.pixabay.com/audio/2022/10/16/audio_12c7e5c7b6.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    </div>
+                    <div class="bg-purple-100 rounded-lg p-3 flex items-center space-x-3 shadow-sm">
+                        <span class="text-2xl">🌲</span>
+                        <div class="flex-1">
+                            <div class="font-semibold text-purple-700">Forest Ambience</div>
+                            <audio controls preload="auto" class="w-full mt-1 audio-control">
+                                <source src="https://cdn.pixabay.com/audio/2022/08/20/audio_124bfa8c8f.mp3" type="audio/mp3">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <span id="reassure-msg" class="inline-block bg-purple-200 text-purple-700 px-4 py-2 rounded-full text-sm shadow-sm fade-in">
+                        Remember: You are not alone. Take your time and breathe.
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Exercise expand/collapse logic
+        document.querySelectorAll('.exercise-title').forEach(function(titleDiv) {
+            titleDiv.addEventListener('click', function() {
+                const parent = titleDiv.parentElement;
+                const details = parent.querySelector('.exercise-details');
+                const chevron = titleDiv.querySelector('.chevron');
+                if (details.style.display === 'none' || details.style.display === '') {
+                    // Collapse all others
+                    document.querySelectorAll('.exercise-details').forEach(function(ul) {
+                        ul.style.display = 'none';
+                    });
+                    document.querySelectorAll('.chevron').forEach(function(ch) {
+                        ch.classList.remove('rotate');
+                    });
+                    // Expand this one
+                    details.style.display = 'block';
+                    chevron.classList.add('rotate');
+                } else {
+                    details.style.display = 'none';
+                    chevron.classList.remove('rotate');
+                }
+            });
+        });
+
+        // Audio play/pause management
+        const audios = document.querySelectorAll('.audio-control');
+        audios.forEach(audio => {
+            audio.addEventListener('play', function() {
+                audios.forEach(other => {
+                    if (other !== audio) {
+                        other.pause();
+                    }
+                });
+            });
+        });
+
+        // Fade in reassurance message on load
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('reassure-msg').classList.add('visible');
+            }, 300);
+        });
+    </script>
+</body>
+</html>

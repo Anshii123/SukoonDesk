@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SukoonDesk - Journal Diary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap & Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            min-height: 100vh;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem;
+        }
+        .journal-title::placeholder {
+            color: #8f5fd1;
+            opacity: 0.7;
+        }
+        .journal-entry::placeholder {
+            color: #a18cd1;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center">
+    <div class="container py-5">
+        <div class="glass mx-auto max-w-2xl p-6">
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-purple-700 mb-2">📝 Your Journal Diary</h2>
+                <p class="text-purple-500">Express your emotions, reflect, and find your Sukoon.</p>
+            </div>
+            <!-- Journal Form -->
+            <form id="journalForm">
+                <div class="mb-4">
+                    <input type="text" class="form-control journal-title py-3 px-4 rounded-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition"
+                        placeholder="Title (e.g. Feeling today...)" id="journalTitle" required>
+                </div>
+                <div class="mb-4">
+                    <textarea class="form-control journal-entry py-3 px-4 rounded-lg border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition"
+                        id="journalEntry" rows="8" placeholder="Write your thoughts, feelings, or anything on your mind..." required></textarea>
+                </div>
+                <div class="flex justify-between items-center">
+                    <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full font-semibold shadow-lg transition">
+                        Save Entry
+                    </button>
+                    <span class="text-sm text-purple-400" id="saveStatus"></span>
+                </div>
+            </form>
+            <!-- Previous Entries (Demo) -->
+            <div class="mt-8">
+                <h4 class="text-purple-700 font-semibold mb-3">Previous Entries</h4>
+                <ul id="entriesList" class="space-y-3"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple LocalStorage-based demo for saving entries
+        const form = document.getElementById('journalForm');
+        const entriesList = document.getElementById('entriesList');
+        const saveStatus = document.getElementById('saveStatus');
+
+        function getEntries() {
+            return JSON.parse(localStorage.getItem('sukoon_journal_entries') || '[]');
+        }
+
+        function saveEntry(title, content) {
+            const entries = getEntries();
+            const now = new Date();
+            entries.unshift({
+                title,
+                content,
+                date: now.toLocaleDateString(),
+                time: now.toLocaleTimeString()
+            });
+            localStorage.setItem('sukoon_journal_entries', JSON.stringify(entries));
+        }
+
+        function renderEntries() {
+            const entries = getEntries();
+            entriesList.innerHTML = '';
+            if (entries.length === 0) {
+                entriesList.innerHTML = `<li class="text-purple-300 italic">No entries yet. Start writing to feel better!</li>`;
+                return;
+            }
+            entries.slice(0, 5).forEach(entry => {
+                entriesList.innerHTML += `
+                    <li class="bg-purple-50 p-3 rounded-lg border-l-4 border-purple-300 shadow-sm">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-semibold text-purple-700">${entry.title}</span>
+                            <span class="text-xs text-purple-400">${entry.date} ${entry.time}</span>
+                        </div>
+                        <div class="text-purple-600 text-sm">${entry.content}</div>
+                    </li>
+                `;
+            });
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('journalTitle').value.trim();
+            const content = document.getElementById('journalEntry').value.trim();
+            if (title && content) {
+                saveEntry(title, content);
+                form.reset();
+                renderEntries();
+                saveStatus.textContent = "Saved!";
+                setTimeout(() => saveStatus.textContent = '', 1500);
+            }
+        });
+
+        // Initial render
+        renderEntries();
+    </script>
+</body>
+</html>
