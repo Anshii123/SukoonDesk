@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SukoonDesk – Mood Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md py-6 mb-8">
+    <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="https://cdn-icons-png.flaticon.com/512/2966/2966784.png" class="h-10 w-10" alt="Logo">
+        <span class="text-2xl font-bold text-purple-700">SukoonDesk</span>
+      </div>
+      <span class="text-purple-600 font-semibold">Mood Tracker</span>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4">
+    <!-- Positive Affirmation -->
+    <section class="mb-8">
+      <div class="bg-purple-100 rounded-xl flex items-center gap-4 p-5 shadow">
+        <i class="fas fa-sun text-3xl text-purple-500"></i>
+        <div>
+          <span class="block text-lg font-semibold text-purple-700 mb-1">Today's Affirmation</span>
+          <span id="affirmation" class="text-gray-700 text-base"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mood Input Section -->
+    <section class="mb-10">
+      <div class="bg-white rounded-xl shadow p-6 flex flex-col md:flex-row md:items-center gap-6">
+        <div class="flex-1">
+          <label class="block text-gray-700 font-semibold mb-2">How are you feeling today?</label>
+          <div class="flex gap-3 mb-3">
+            <button class="mood-btn px-4 py-2 rounded-full bg-purple-100 text-purple-700 font-bold hover:bg-purple-200 transition" data-mood="Happy">
+              😊 Happy
+            </button>
+            <button class="mood-btn px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-bold hover:bg-blue-200 transition" data-mood="Calm">
+              😌 Calm
+            </button>
+            <button class="mood-btn px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 font-bold hover:bg-yellow-200 transition" data-mood="Anxious">
+              😬 Anxious
+            </button>
+            <button class="mood-btn px-4 py-2 rounded-full bg-pink-100 text-pink-700 font-bold hover:bg-pink-200 transition" data-mood="Sad">
+              😢 Sad
+            </button>
+            <button class="mood-btn px-4 py-2 rounded-full bg-gray-100 text-gray-700 font-bold hover:bg-gray-200 transition" data-mood="Neutral">
+              😐 Neutral
+            </button>
+          </div>
+          <input id="moodNote" type="text" placeholder="Add a note (optional)..."
+                 class="w-full border border-purple-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-300 text-gray-700"/>
+        </div>
+        <button id="saveMood" class="bg-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition">
+          Save Mood
+        </button>
+      </div>
+    </section>
+
+    <!-- Mood Calendar Section -->
+    <section class="mb-10">
+      <div class="bg-white rounded-xl shadow p-6">
+        <h2 class="text-xl font-bold text-purple-700 mb-4">Your Mood Calendar</h2>
+        <div id="calendar" class="grid grid-cols-7 gap-2">
+          <!-- Days will be injected here -->
+        </div>
+        <div class="text-xs text-gray-400 mt-2">* Click on any day to see your note.</div>
+      </div>
+    </section>
+
+    <!-- Mood History Graph Placeholder -->
+    <section class="mb-10">
+      <div class="bg-white rounded-xl shadow p-6">
+        <h2 class="text-xl font-bold text-purple-700 mb-4">Mood History (Past Week)</h2>
+        <div class="w-full h-40 flex items-center justify-center bg-purple-50 rounded-lg text-purple-400 text-2xl font-bold">
+          <i class="fas fa-chart-line mr-2"></i>
+          <span>Graph coming soon...</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mood Note Modal -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl p-6 w-80 text-center relative">
+      <button id="closeModal" class="absolute top-2 right-3 text-gray-400 hover:text-purple-500 text-xl">&times;</button>
+      <h3 class="text-lg font-bold text-purple-700 mb-2" id="modalMood"></h3>
+      <div class="text-gray-700 mb-2" id="modalDate"></div>
+      <div class="text-gray-600" id="modalNote"></div>
+    </div>
+  </div>
+
+  <script>
+    // Affirmations (change daily)
+    const affirmations = [
+      "You are stronger than your anxiety.",
+      "Every day is a fresh start.",
+      "You are enough, just as you are.",
+      "Your feelings are valid.",
+      "You have overcome so much.",
+      "Breathe in calm, breathe out stress.",
+      "You are not alone on this journey."
+    ];
+    const today = new Date();
+    document.getElementById('affirmation').textContent = affirmations[today.getDate() % affirmations.length];
+
+    // Mood calendar logic
+    const calendar = document.getElementById('calendar');
+    const numDays = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+    const startDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+    let moodData = JSON.parse(localStorage.getItem('moodData') || '{}');
+
+    function renderCalendar() {
+      calendar.innerHTML = '';
+      // Empty slots before first day
+      for (let i = 0; i < startDay; i++) {
+        calendar.innerHTML += `<div></div>`;
+      }
+      // Days of month
+      for (let d = 1; d <= numDays; d++) {
+        const dateKey = `${today.getFullYear()}-${today.getMonth()+1}-${d}`;
+        const entry = moodData[dateKey];
+        let moodEmoji = '⬜';
+        if (entry) {
+          switch (entry.mood) {
+            case 'Happy': moodEmoji = '😊'; break;
+            case 'Calm': moodEmoji = '😌'; break;
+            case 'Anxious': moodEmoji = '😬'; break;
+            case 'Sad': moodEmoji = '😢'; break;
+            case 'Neutral': moodEmoji = '😐'; break;
+          }
+        }
+        calendar.innerHTML += `
+          <button class="w-10 h-10 rounded-lg flex flex-col items-center justify-center hover:bg-purple-100 transition"
+                  onclick="showModal('${dateKey}')">
+            <span class="text-xl">${moodEmoji}</span>
+            <span class="text-xs text-gray-400">${d}</span>
+          </button>
+        `;
+      }
+    }
+
+    // Mood input logic
+    let selectedMood = null;
+    document.querySelectorAll('.mood-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('ring-2', 'ring-purple-400'));
+        this.classList.add('ring-2', 'ring-purple-400');
+        selectedMood = this.dataset.mood;
+      });
+    });
+
+    document.getElementById('saveMood').addEventListener('click', () => {
+      if (!selectedMood) {
+        alert('Please select your mood.');
+        return;
+      }
+      const note = document.getElementById('moodNote').value;
+      const dateKey = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+      moodData[dateKey] = { mood: selectedMood, note, date: new Date().toLocaleDateString() };
+      localStorage.setItem('moodData', JSON.stringify(moodData));
+      document.getElementById('moodNote').value = '';
+      document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('ring-2', 'ring-purple-400'));
+      selectedMood = null;
+      renderCalendar();
+      alert('Mood saved! 😊');
+    });
+
+    // Modal logic
+    window.showModal = function(dateKey) {
+      const entry = moodData[dateKey];
+      if (!entry) return;
+      document.getElementById('modalMood').textContent = `${entry.mood}`;
+      document.getElementById('modalDate').textContent = entry.date || dateKey;
+      document.getElementById('modalNote').textContent = entry.note ? `"${entry.note}"` : "No note for this day.";
+      document.getElementById('modal').classList.remove('hidden');
+    };
+    document.getElementById('closeModal').onclick = () => {
+      document.getElementById('modal').classList.add('hidden');
+    };
+
+    // Initial render
+    renderCalendar();
+  </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SukoonDesk - Emotion Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="container min-h-screen flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-3xl">
+            <h2 class="text-3xl font-bold text-purple-600 mb-6 text-center">Emotion Analysis</h2>
+            
+            <!-- Detection Mode Toggle -->
+            <div class="flex justify-center mb-8">
+                <div class="bg-gray-100 p-1 rounded-full">
+                    <button id="faceBtn" class="px-6 py-2 rounded-full bg-purple-600 text-white">
+                        Face Analysis
+                    </button>
+                    <button id="voiceBtn" class="px-6 py-2 rounded-full bg-gray-100 text-gray-600">
+                        Voice Analysis
+                    </button>
+                </div>
+            </div>
+
+            <!-- Face Detection Section -->
+            <div id="faceSection" class="space-y-6">
+                <div class="text-center">
+                    <video id="videoFeed" class="w-full max-w-md mx-auto rounded-lg border-4 border-purple-100" autoplay></video>
+                    <canvas id="faceCanvas" class="hidden"></canvas>
+                </div>
+                <div class="text-center">
+                    <button id="startFace" class="bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-700 transition">
+                        Start Camera
+                    </button>
+                    <p class="text-gray-500 mt-2">We'll analyze facial expressions in real-time</p>
+                </div>
+            </div>
+
+            <!-- Voice Detection Section -->
+            <div id="voiceSection" class="hidden space-y-6">
+                <div class="text-center">
+                    <div id="audioVisualizer" class="w-full max-w-md mx-auto h-32 bg-purple-50 rounded-lg flex items-center justify-center">
+                        <div class="text-purple-600">
+                            <i class="fas fa-microphone text-4xl"></i>
+                            <div class="mt-2">Click to start recording</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button id="startVoice" class="bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-700 transition">
+                        Start Recording
+                    </button>
+                    <p class="text-gray-500 mt-2">We'll analyze your voice tone and patterns</p>
+                </div>
+            </div>
+
+            <!-- Results Display -->
+            <div id="results" class="mt-8 hidden">
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-purple-600 mb-2">Analysis Results</h3>
+                    <p class="text-gray-700">Detected Emotion: <span id="emotionResult" class="font-bold">...</span></p>
+                    <p class="text-gray-700">Confidence Level: <span id="confidenceResult" class="font-bold">...</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const faceSection = document.getElementById('faceSection');
+        const voiceSection = document.getElementById('voiceSection');
+        const startFaceBtn = document.getElementById('startFace');
+        const startVoiceBtn = document.getElementById('startVoice');
+        const video = document.getElementById('videoFeed');
+        let mediaStream;
+
+        // Toggle between face/voice modes
+        document.getElementById('faceBtn').addEventListener('click', () => {
+            faceSection.classList.remove('hidden');
+            voiceSection.classList.add('hidden');
+        });
+
+        document.getElementById('voiceBtn').addEventListener('click', () => {
+            faceSection.classList.add('hidden');
+            voiceSection.classList.remove('hidden');
+        });
+
+        // Face Detection Handler
+        startFaceBtn.addEventListener('click', async () => {
+            try {
+                mediaStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'user' }
+                });
+                video.srcObject = mediaStream;
+                startFaceBtn.textContent = 'Analyzing...';
+                // Add face emotion detection logic here
+                simulateFaceAnalysis();
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+                alert('Camera access is required for face analysis');
+            }
+        });
+
+        // Voice Detection Handler
+        startVoiceBtn.addEventListener('click', async () => {
+            try {
+                mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                startVoiceBtn.textContent = 'Listening...';
+                // Add voice emotion detection logic here
+                simulateVoiceAnalysis();
+            } catch (error) {
+                console.error('Error accessing microphone:', error);
+                alert('Microphone access is required for voice analysis');
+            }
+        });
+
+        // Demo simulation (Replace with actual AI model integration)
+        function simulateFaceAnalysis() {
+            setTimeout(() => {
+                document.getElementById('results').classList.remove('hidden');
+                document.getElementById('emotionResult').textContent = 'Calm';
+                document.getElementById('confidenceResult').textContent = '82%';
+                startFaceBtn.textContent = 'Restart Analysis';
+            }, 2000);
+        }
+
+        function simulateVoiceAnalysis() {
+            setTimeout(() => {
+                document.getElementById('results').classList.remove('hidden');
+                document.getElementById('emotionResult').textContent = 'Neutral';
+                document.getElementById('confidenceResult').textContent = '75%';
+                startVoiceBtn.textContent = 'Start Recording';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

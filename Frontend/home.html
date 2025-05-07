@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SukoonDesk – Your Calm Companion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Animate on Scroll (AOS) for subtle animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-purple-50 text-gray-800">
+
+  <!-- Hero Mission Section -->
+  <section class="pt-24 pb-12 text-center bg-white shadow-sm" data-aos="fade-down">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-bold text-purple-700 mb-4">Welcome to SukoonDesk</h1>
+      <p class="text-lg md:text-xl mb-6 text-gray-600">
+        Empowering you with AI-driven tools, gentle exercises, and community support for a calmer, healthier mind.
+      </p>
+      <a href="#features" class="inline-block bg-purple-600 text-white px-8 py-3 rounded-full font-semibold shadow hover:bg-purple-700 transition">Explore Features</a>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section id="features" class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">What You Can Do with SukoonDesk</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Feature Card 1 -->
+        <div onclick="location.href='emotion-detection.html'" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl cursor-pointer transition" data-aos="zoom-in">
+          <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-smile-beam text-purple-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Emotion Detection</h3>
+          <p class="text-gray-600 text-sm">AI-powered emotion detection via face and voice.</p>
+        </div>
+        <!-- Feature Card 2 -->
+        <div onclick="location.href='breathing-exercises.html'" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl cursor-pointer transition" data-aos="zoom-in" data-aos-delay="50">
+          <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-wind text-purple-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Breathing Exercises</h3>
+          <p class="text-gray-600 text-sm">Guided breathing to help you relax and refocus.</p>
+        </div>
+        <!-- Feature Card 3 -->
+        <div onclick="location.href='mood-tracker.html'" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl cursor-pointer transition" data-aos="zoom-in" data-aos-delay="100">
+          <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-chart-line text-purple-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Mood Tracker</h3>
+          <p class="text-gray-600 text-sm">Track your emotions and see your progress over time.</p>
+        </div>
+        <!-- Feature Card 4 -->
+        <div onclick="location.href='anxiety-buddy.html'" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl cursor-pointer transition" data-aos="zoom-in" data-aos-delay="150">
+          <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-robot text-purple-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Anxiety Buddy Chatbot</h3>
+          <p class="text-gray-600 text-sm">Chat with your AI buddy anytime you need support.</p>
+        </div>
+        <!-- Feature Card 5 -->
+        <div onclick="location.href='journal.html'" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl cursor-pointer transition" data-aos="zoom-in" data-aos-delay="200">
+          <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-book-open text-purple-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Journal & Diary</h3>
+          <p class="text-gray-600 text-sm">Write your thoughts and reflect in your private space.</p>
+        </div>
+        <!-- Feature Card 6 -->
+        <div onclick="location.href='sos-kit.html'" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl cursor-pointer transition" data-aos="zoom-in" data-aos-delay="250">
+          <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-briefcase-medical text-purple-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Quick SOS Kit</h3>
+          <p class="text-gray-600 text-sm">Offline tools and resources for immediate support.</p>
+        </div>
+        <!-- Feature Card 7 -->
+        <div onclick="location.href='sound-space.html'" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl cursor-pointer transition" data-aos="zoom-in" data-aos-delay="300">
+          <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-music text-purple-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Sound Space Generator</h3>
+          <p class="text-gray-600 text-sm">Curated sounds to match and improve your mood.</p>
+        </div>
+        <!-- Feature Card 8 -->
+        <div onclick="location.href='community.html'" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl cursor-pointer transition" data-aos="zoom-in" data-aos-delay="350">
+          <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-users text-purple-600 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Community Support</h3>
+          <p class="text-gray-600 text-sm">Connect with others, share, and find support together.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="py-16 bg-purple-50">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-10" data-aos="fade-up">How SukoonDesk Works</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+        <div data-aos="fade-up" data-aos-delay="50">
+          <div class="mx-auto w-12 h-12 flex items-center justify-center bg-purple-200 rounded-full mb-3">
+            <i class="fas fa-user-check text-xl text-purple-700"></i>
+          </div>
+          <h4 class="font-semibold mb-1">Sign Up</h4>
+          <p class="text-sm text-gray-600">Create your secure, private account.</p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+          <div class="mx-auto w-12 h-12 flex items-center justify-center bg-purple-200 rounded-full mb-3">
+            <i class="fas fa-brain text-xl text-purple-700"></i>
+          </div>
+          <h4 class="font-semibold mb-1">Detect & Track</h4>
+          <p class="text-sm text-gray-600">Use AI tools and trackers to understand your mood.</p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="150">
+          <div class="mx-auto w-12 h-12 flex items-center justify-center bg-purple-200 rounded-full mb-3">
+            <i class="fas fa-hand-holding-heart text-xl text-purple-700"></i>
+          </div>
+          <h4 class="font-semibold mb-1">Engage</h4>
+          <p class="text-sm text-gray-600">Try exercises, journaling, and chat with your buddy.</p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="200">
+          <div class="mx-auto w-12 h-12 flex items-center justify-center bg-purple-200 rounded-full mb-3">
+            <i class="fas fa-comments text-xl text-purple-700"></i>
+          </div>
+          <h4 class="font-semibold mb-1">Connect</h4>
+          <p class="text-sm text-gray-600">Join the community and share your journey.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Honest Reviews Section -->
+  <section id="reviews" class="py-16">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-10" data-aos="fade-up">What Our Users Say</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-right">
+          <div class="flex items-center mb-4">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-12 h-12 rounded-full mr-3" alt="User">
+            <div>
+              <h4 class="font-semibold">Ayesha K.</h4>
+              <span class="text-xs text-gray-500">Student</span>
+            </div>
+          </div>
+          <p class="text-gray-600">"The emotion detection feature helped me understand my triggers and the breathing exercises are so calming!"</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up">
+          <div class="flex items-center mb-4">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-12 h-12 rounded-full mr-3" alt="User">
+            <div>
+              <h4 class="font-semibold">Rahul S.</h4>
+              <span class="text-xs text-gray-500">Software Engineer</span>
+            </div>
+          </div>
+          <p class="text-gray-600">"I love the mood tracker and the community support. I feel less alone in my journey now."</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-left">
+          <div class="flex items-center mb-4">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-12 h-12 rounded-full mr-3" alt="User">
+            <div>
+              <h4 class="font-semibold">Priya M.</h4>
+              <span class="text-xs text-gray-500">Teacher</span>
+            </div>
+          </div>
+          <p class="text-gray-600">"The SOS kit and sound space are my go-to during tough moments. SukoonDesk really cares!"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-white py-6 text-center text-gray-500 text-sm">
+    &copy; 2025 SukoonDesk. All rights reserved.
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 900, once: true });
+  </script>
+</body>
+</html>
